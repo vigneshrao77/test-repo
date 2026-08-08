@@ -8,6 +8,7 @@ function subtract(a, b) {
 }
 
 function multiply(a, b) {
+    console.log("Multiplying numbers...");
     return a * b;
 }
 
