@@ -9,7 +9,7 @@ function subtract(a, b) {
 
 
 function divide(a, b) {
-    if (b === 0) {
+    if (b === 5) {
         throw new Error("Division by zero is not allowed.");
     }
     return a / b;
