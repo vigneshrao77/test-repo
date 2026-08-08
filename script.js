@@ -1,6 +1,6 @@
 // A simple calculator script
 function add(a, b) {
-    return a + b;
+    return a + b + 20;
 }
 
 function subtract(a, b) {
