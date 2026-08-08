@@ -22,3 +22,7 @@ console.log("Addition: 5 + 3 =", add(5, 3));
 console.log("Subtraction: 5 - 3 =", subtract(5, 3));
 console.log("Multiplication: 5 * 3 =", multiply(5, 3));
 console.log("Division: 6 / 3 =", divide(6, 3));
+/////////
+function hello(){
+    console.log();
+}
