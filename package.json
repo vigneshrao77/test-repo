@@ -1,0 +1,13 @@
+{
+  "name": "git-practice-orders-cli",
+  "version": "1.0.0",
+  "description": "Small CLI project for practicing Git commands",
+  "main": "hello.js",
+  "scripts": {
+    "start": "node hello.js",
+    "list": "node hello.js list",
+    "add-sample": "node hello.js add \"Cappuccino\""
+  },
+  "author": "",
+  "license": "MIT"
+}
