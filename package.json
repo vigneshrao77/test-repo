@@ -1,13 +1,16 @@
 {
-  "name": "git-practice-orders-cli",
+  "name": "simple-user-form",
   "version": "1.0.0",
-  "description": "Small CLI project for practicing Git commands",
-  "main": "hello.js",
+  "description": "Simple user form backed by PostgreSQL",
+  "main": "server.js",
   "scripts": {
-    "start": "node hello.js",
-    "list": "node hello.js list",
-    "add-sample": "node hello.js add \"Cappuccino\""
+    "start": "node server.js"
   },
   "author": "",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "pg": "^8.13.1"
+  }
 }

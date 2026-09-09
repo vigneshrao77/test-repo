@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PostgreSQL form demo</title>
+    <style>
+      :root { font-family: system-ui, sans-serif; color: #1f2937; background: #f3f4f6; }
+      body { max-width: 680px; margin: 0 auto; padding: 48px 20px; }
+      main { background: white; padding: 32px; border-radius: 12px; box-shadow: 0 8px 30px #00000012; }
+      h1 { margin-top: 0; }
+      .status { padding: 12px; border-radius: 6px; background: #f3f4f6; }
+      .status.connected { color: #047857; background: #ecfdf5; }
+      .status.disconnected { color: #b91c1c; background: #fef2f2; }
+      form { display: grid; gap: 16px; }
+      label { display: grid; gap: 6px; font-weight: 600; }
+      input { padding: 11px; border: 1px solid #d1d5db; border-radius: 6px; font: inherit; }
+      button { padding: 11px 16px; border: 0; border-radius: 6px; color: white; background: #2563eb; font: inherit; cursor: pointer; }
+      .secondary { background: #4b5563; margin-top: 8px; }
+      button:disabled { opacity: .6; cursor: wait; }
+      #message { min-height: 24px; }
+      .error { color: #b91c1c; }
+      .success { color: #047857; }
+      li { margin: 10px 0; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>PostgreSQL user demo</h1>
+      <p>Submit a user, then confirm it appears below after being saved in PostgreSQL.</p>
+      <p id="database-status" class="status">Checking database connection...</p>
+      <form id="user-form">
+        <label>Name <input name="name" maxlength="100" required autocomplete="name"></label>
+        <label>Email <input name="email" type="email" required autocomplete="email"></label>
+        <button type="submit">Save to PostgreSQL</button>
+      </form>
+      <p id="message" role="status"></p>
+      <h2>Saved users</h2>
+      <button id="refresh-button" class="secondary" type="button">Refresh saved users</button>
+      <ul id="user-list"><li>Loading...</li></ul>
+    </main>
+    <script>
+      const form = document.querySelector("#user-form");
+      const message = document.querySelector("#message");
+      const userList = document.querySelector("#user-list");
+      const databaseStatus = document.querySelector("#database-status");
+      const refreshButton = document.querySelector("#refresh-button");
+
+      function renderUsers(users) {
+        userList.innerHTML = users.length
+          ? users.map((user) => `<li><strong>${escapeHtml(user.name)}</strong> &lt;${escapeHtml(user.email)}&gt;</li>`).join("")
+          : "<li>No users yet.</li>";
+      }
+
+      function escapeHtml(value) {
+        return value.replace(/[&<>"']/g, (character) => ({
+          "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;"
+        }[character]));
+      }
+
+      async function loadUsers() {
+        const response = await fetch("/api/users");
+        if (!response.ok) throw new Error("Could not load users.");
+        renderUsers(await response.json());
+      }
+
+      async function checkDatabase() {
+        try {
+          const response = await fetch("/api/health");
+          if (!response.ok) throw new Error();
+          databaseStatus.className = "status connected";
+          databaseStatus.textContent = "PostgreSQL connected";
+        } catch (error) {
+          databaseStatus.className = "status disconnected";
+          databaseStatus.textContent = "PostgreSQL disconnected";
+        }
+      }
+
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const button = form.querySelector("button");
+        button.disabled = true;
+        message.className = "";
+        message.textContent = "";
+        try {
+          const response = await fetch("/api/users", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(Object.fromEntries(new FormData(form)))
+          });
+          const data = await response.json();
+          if (!response.ok) throw new Error(data.error || "Could not save user.");
+          message.className = "success";
+          message.textContent = `Saved to PostgreSQL: ${data.name} (${data.email})`;
+          form.reset();
+          await loadUsers();
+        } catch (error) {
+          message.className = "error";
+          message.textContent = error.message;
+        } finally {
+          button.disabled = false;
+        }
+      });
+
+      refreshButton.addEventListener("click", () => {
+        loadUsers().catch((error) => {
+          message.className = "error";
+          message.textContent = error.message;
+        });
+      });
+
+      checkDatabase();
+      loadUsers().catch((error) => {
+        message.className = "error";
+        message.textContent = error.message;
+        userList.innerHTML = "";
+      });
+    </script>
+  </body>
+</html>
