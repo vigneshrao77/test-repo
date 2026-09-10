@@ -1,0 +1,200 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-10T21:36:30Z",
+  "title": "Design System: Simple User Form",
+  "extensions": {
+    "colorMeta": {
+      "primary": {
+        "role": "primary",
+        "displayName": "Cobalt Blueprint",
+        "canonical": "#2563eb",
+        "tonalRamp": ["#1e3a8a", "#1d4ed8", "#2563eb", "#3b82f6", "#60a5fa", "#93c5fd", "#bfdbfe", "#dbeafe"]
+      },
+      "secondary": {
+        "role": "secondary",
+        "displayName": "Slate Neutral",
+        "canonical": "#4b5563",
+        "tonalRamp": ["#111827", "#1f2937", "#374151", "#4b5563", "#6b7280", "#9ca3af", "#d1d5db", "#f3f4f6"]
+      },
+      "telemetry-emerald": {
+        "role": "tertiary",
+        "displayName": "Telemetry Emerald",
+        "canonical": "#047857",
+        "tonalRamp": ["#064e3b", "#065f46", "#047857", "#059669", "#10b981", "#34d399", "#6ee7b7", "#ecfdf5"]
+      },
+      "telemetry-emerald-bg": {
+        "role": "neutral",
+        "displayName": "Mint Wash",
+        "canonical": "#ecfdf5",
+        "tonalRamp": ["#064e3b", "#047857", "#10b981", "#34d399", "#6ee7b7", "#a7f3d0", "#d1fae5", "#ecfdf5"]
+      },
+      "signal-crimson": {
+        "role": "tertiary",
+        "displayName": "Signal Crimson",
+        "canonical": "#b91c1c",
+        "tonalRamp": ["#7f1d1d", "#991b1b", "#b91c1c", "#dc2626", "#ef4444", "#f87171", "#fca5a5", "#fef2f2"]
+      },
+      "signal-crimson-bg": {
+        "role": "neutral",
+        "displayName": "Rose Wash",
+        "canonical": "#fef2f2",
+        "tonalRamp": ["#7f1d1d", "#b91c1c", "#ef4444", "#f87171", "#fca5a5", "#fecaca", "#fee2e2", "#fef2f2"]
+      },
+      "neutral-ground": {
+        "role": "neutral",
+        "displayName": "Soft Canvas Gray",
+        "canonical": "#f3f4f6",
+        "tonalRamp": ["#111827", "#1f2937", "#374151", "#4b5563", "#6b7280", "#9ca3af", "#d1d5db", "#f3f4f6"]
+      },
+      "neutral-surface": {
+        "role": "neutral",
+        "displayName": "Pure White Surface",
+        "canonical": "#ffffff",
+        "tonalRamp": ["#111827", "#374151", "#6b7280", "#9ca3af", "#d1d5db", "#e5e7eb", "#f3f4f6", "#ffffff"]
+      },
+      "neutral-text": {
+        "role": "neutral",
+        "displayName": "Graphite Charcoal",
+        "canonical": "#1f2937",
+        "tonalRamp": ["#030712", "#111827", "#1f2937", "#374151", "#4b5563", "#6b7280", "#9ca3af", "#e5e7eb"]
+      },
+      "neutral-border": {
+        "role": "neutral",
+        "displayName": "Subtle Hairline Gray",
+        "canonical": "#d1d5db",
+        "tonalRamp": ["#374151", "#4b5563", "#6b7280", "#9ca3af", "#d1d5db", "#e5e7eb", "#f3f4f6", "#f9fafb"]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Primary workbench headline and page title."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Major section subheadings."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Standard narrative copy and list items."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Form field labels and button copy."
+      },
+      "mono": {
+        "displayName": "Monospace",
+        "purpose": "Status pills, code snippets, and queue telemetry."
+      }
+    },
+    "shadows": [
+      {
+        "name": "card-ambient",
+        "value": "0 8px 30px #00000012",
+        "purpose": "Diffuse ambient elevation for the main workbench card."
+      }
+    ],
+    "motion": [
+      {
+        "name": "transition-standard",
+        "value": "all 0.15s ease",
+        "purpose": "Tactile state transitions on buttons and inputs."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "mobile",
+        "value": "680px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Solid cobalt submission button for primary actions.",
+      "html": "<button class=\"ds-btn-primary\">Save User</button>",
+      "css": ".ds-btn-primary { background: #2563eb; color: #ffffff; padding: 11px 16px; border: 0; border-radius: 6px; font-family: system-ui, sans-serif; font-size: 1rem; cursor: pointer; transition: background-color 0.15s ease; } .ds-btn-primary:hover { background: #1d4ed8; } .ds-btn-primary:focus-visible { outline: 2px solid #2563eb; outline-offset: 2px; } .ds-btn-primary:disabled { opacity: 0.6; cursor: wait; }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Subdued neutral button for secondary operations.",
+      "html": "<button class=\"ds-btn-secondary\">Refresh Data</button>",
+      "css": ".ds-btn-secondary { background: #4b5563; color: #ffffff; padding: 11px 16px; border: 0; border-radius: 6px; font-family: system-ui, sans-serif; font-size: 1rem; cursor: pointer; transition: background-color 0.15s ease; } .ds-btn-secondary:hover { background: #374151; } .ds-btn-secondary:focus-visible { outline: 2px solid #4b5563; outline-offset: 2px; }"
+    },
+    {
+      "name": "Text Input",
+      "kind": "input",
+      "refersTo": "input-field",
+      "description": "Crisp white input field with hairline border and focus ring.",
+      "html": "<input class=\"ds-input\" type=\"text\" placeholder=\"Enter name...\">",
+      "css": ".ds-input { padding: 11px; border: 1px solid #d1d5db; border-radius: 6px; font-family: system-ui, sans-serif; font-size: 1rem; color: #1f2937; background: #ffffff; width: 100%; box-sizing: border-box; transition: border-color 0.15s ease, box-shadow 0.15s ease; } .ds-input:focus-visible { outline: none; border-color: #2563eb; box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15); }"
+    },
+    {
+      "name": "Status Pill (Connected)",
+      "kind": "chip",
+      "refersTo": "status-pill",
+      "description": "High-signal telemetry indicator for verified live database connectivity.",
+      "html": "<div class=\"ds-status ds-status-connected\">Supabase connected</div>",
+      "css": ".ds-status { padding: 12px; border-radius: 6px; font-family: ui-monospace, monospace; font-size: 0.875rem; font-weight: 500; } .ds-status-connected { color: #047857; background: #ecfdf5; }"
+    },
+    {
+      "name": "Status Pill (Disconnected)",
+      "kind": "chip",
+      "refersTo": "status-pill",
+      "description": "High-signal telemetry indicator for disconnected database or error states.",
+      "html": "<div class=\"ds-status ds-status-disconnected\">Database disconnected</div>",
+      "css": ".ds-status { padding: 12px; border-radius: 6px; font-family: ui-monospace, monospace; font-size: 0.875rem; font-weight: 500; } .ds-status-disconnected { color: #b91c1c; background: #fef2f2; }"
+    },
+    {
+      "name": "Workbench Card Container",
+      "kind": "card",
+      "refersTo": "card-container",
+      "description": "Elevated white surface housing the primary form and outputs.",
+      "html": "<div class=\"ds-card\"><h3>Workbench Panel</h3><p>Utilitarian container with ambient drop shadow.</p></div>",
+      "css": ".ds-card { background: #ffffff; padding: 32px; border-radius: 12px; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.07); color: #1f2937; font-family: system-ui, sans-serif; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Developer Workbench",
+    "overview": "The Developer Workbench is a clean, utilitarian design system built for functional clarity, predictable feedback, and technical reliability. It prioritizes rapid task completion, unambiguous system health communication, and ergonomic form interactions over decorative excess.\n\nEvery element exists with explicit purpose: system state is rendered with high-contrast, universally understood color indicators, inputs maintain crisp tactile boundaries, and the focal content lives on a softly elevated canvas against a calm neutral ground.",
+    "keyCharacteristics": [
+      "Utilitarian clarity with zero ornamental distraction",
+      "High-signal color channels for verified system states (emerald connected, crimson disconnected, cobalt primary)",
+      "Softly floating structural surfaces with flat, tactile interactive controls",
+      "Dual typography hierarchy pairing clean system sans-serif with monospace telemetry"
+    ],
+    "rules": [
+      {
+        "name": "The Transparent State Rule",
+        "body": "System connection, sync, and submission states must always be immediately legible with dedicated color channels (emerald = verified connected, crimson = error/disconnected, cobalt = actionable).",
+        "section": "colors"
+      },
+      {
+        "name": "The Legible State Rule",
+        "body": "Human-facing content uses system sans-serif for friction-free reading, while telemetry tags, queue counters, and system metrics employ monospace for precise alignment.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat Rest Rule",
+        "body": "Interactive controls (buttons, inputs) remain flat at rest; depth belongs solely to structural surfaces or active elevations.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do use 6px corner radius (rounded.sm) for buttons, text inputs, and status badges.",
+      "Do pair status text colors (#047857, #b91c1c) with matching tinted background washes (#ecfdf5, #fef2f2) for high contrast and legibility.",
+      "Do use 0 8px 30px #00000012 exclusively on primary structural cards.",
+      "Do maintain a 680px centered max-width constraint for focused single-task flows."
+    ],
+    "donts": [
+      "Don't introduce arbitrary saturated colors outside the defined cobalt, emerald, and crimson functional channels.",
+      "Don't apply heavy drop shadows or glow effects to form inputs or buttons at rest.",
+      "Don't obscure database connection health or form validation feedback.",
+      "Don't use generic placeholders when descriptive label text is available."
+    ]
+  }
+}
