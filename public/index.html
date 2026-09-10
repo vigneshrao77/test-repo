@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>PostgreSQL form demo</title>
+    <title>User Form Demo</title>
     <style>
       :root { font-family: system-ui, sans-serif; color: #1f2937; background: #f3f4f6; }
       body { max-width: 680px; margin: 0 auto; padding: 48px 20px; }
@@ -26,13 +26,13 @@
   </head>
   <body>
     <main>
-      <h1>PostgreSQL user demo</h1>
-      <p>Submit a user, then confirm it appears below after being saved in PostgreSQL.</p>
+      <h1>User Form Demo</h1>
+      <p>Submit a user, then confirm it appears below after being saved in the database.</p>
       <p id="database-status" class="status">Checking database connection...</p>
       <form id="user-form">
         <label>Name <input name="name" maxlength="100" required autocomplete="name"></label>
         <label>Email <input name="email" type="email" required autocomplete="email"></label>
-        <button type="submit">Save to PostgreSQL</button>
+        <button type="submit">Save User</button>
       </form>
       <p id="message" role="status"></p>
       <h2>Saved users</h2>
@@ -67,12 +67,15 @@
       async function checkDatabase() {
         try {
           const response = await fetch("/api/health");
-          if (!response.ok) throw new Error();
+          const data = await response.json();
+          if (!response.ok || !data.connected) {
+            throw new Error(data.error || "Connection failed");
+          }
           databaseStatus.className = "status connected";
-          databaseStatus.textContent = "PostgreSQL connected";
+          databaseStatus.textContent = data.provider === "supabase" ? "Supabase connected" : "Database connected";
         } catch (error) {
           databaseStatus.className = "status disconnected";
-          databaseStatus.textContent = "PostgreSQL disconnected";
+          databaseStatus.textContent = `Database disconnected (${error.message || "check configuration"})`;
         }
       }
 
@@ -91,7 +94,7 @@
           const data = await response.json();
           if (!response.ok) throw new Error(data.error || "Could not save user.");
           message.className = "success";
-          message.textContent = `Saved to PostgreSQL: ${data.name} (${data.email})`;
+          message.textContent = `Saved user: ${data.name} (${data.email})`;
           form.reset();
           await loadUsers();
         } catch (error) {
